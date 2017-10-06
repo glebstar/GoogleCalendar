@@ -18,7 +18,7 @@ class Google_Test_CalendarTest extends Google_Test_Abstract
         $calendar = new Google_Calendar();
         
         // логин в Google
-        $this->assertTrue($calendar->login('glebstarkov', 'sda837bep'));
+        $this->assertTrue($calendar->login('glebstarkov', '******'));
         
         // добавляем событие в календарь
         $this->assertTrue($calendar->addEvent('24.11.2010', 'New test event'));
