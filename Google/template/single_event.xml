@@ -1,0 +1,6 @@
+﻿<atom:entry xmlns:atom="http://www.w3.org/2005/Atom">
+  <atom:title type="text">{title}</atom:title>
+  <atom:content type="text">{content}</atom:content>
+  <gd:when xmlns:gd="http://schemas.google.com/g/2005" startTime="{startTime}" endTime="{endTime}"/>
+  <gd:where xmlns:gd="http://schemas.google.com/g/2005" valueString="{where}"/>
+</atom:entry>

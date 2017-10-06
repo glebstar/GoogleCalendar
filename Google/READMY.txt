@@ -1,0 +1,86 @@
+﻿Класс Google_Calendar предназначен для создания
+событий в календаре Google.
+
+Из сторонних библиотек использует только
+HTTP_Request2 для осуществления запросов
+на сервер.
+(http://pear.php.net/package/HTTP_Request2)
+
+Публичный интерфейс:
+
+Google_Calendar::login($username, $password)
+/**
+ * Аутентификация в Google
+ *
+ * @param string $username Имя пользователя или e-mail
+ * @param string $password Пароль
+ * 
+ * Ответ сервера будет доступен через $this->_getLastResponse()
+ * 
+ * @throws HTTP_Request2_Exception
+ * @return bool Результат аутентификации
+ *
+ */
+
+Google_Calendar::addEvent($startDate, $body,  $title=false, 
+                          $startTime=false, $endDate=false, 
+                          $endTime=false, $offsetTz=false, 
+                          $where = false)
+/**
+ * Добавление нового события в календарь Google
+ *
+ * @param string $startDate Дата начала
+ *                          формат дд.мм.ГГГГ
+ * @param string $body Текст события
+ * @param string $title Заголовок события
+ * @param string $startTime Время начала
+ *                          формат: чч:мм
+ * @param string $endDate Дата окончания
+ *                        формат: дд.мм.ГГГГ
+ * @param string $endTime Время окончания
+ *                        формат: чч:мм
+ * @param string $offsetTz Временная зона
+ *                         формат: +ЧЧ(-ЧЧ)
+ * @param string $where Место проведения события
+ * 
+ * @throws Exception. При некорректных форматах в параметрах, 
+ *                    либо при выполнении запроса на сервер
+ *                    (См. HTTP_Request2::send())
+ * @return bool Результат работы
+ *
+ */
+ 
+ Google_Calendar::getLastResponse();
+ /**
+ * Возвращает последний ответ сервера
+ *
+ * @return HTTP_Request2_Response
+ *
+ */
+ Через данный объект доступна вся информация
+ полученная с сервера.
+ Подробно здесь:
+ http://pear.php.net/package/HTTP_Request2/docs/latest/HTTP_Request2/HTTP_Request2_Response.html
+ 
+ 
+ Google_Calendar::getLastResponseCode()
+ /**
+ * Возвращает код последнего ответа сервера
+ *
+ * @return mixed false, если ответа сервера не было
+ *               int, если ответ был
+ */
+ Метод является обёрткой для
+ HTTP_Request2_Response::getStatus()
+ Посчитал нужным для более простого доступа
+ к последнему коду ответа сервера.
+ 
+ Простейший пример использования класса:
+ 
+ $calendar = new Google_Calendar();
+ $calendar->login('мойлогинвгугль', 'мойпароль');
+ $calendar->addEvent(date('d.m.Y', 'Текст нового события');
+ 
+ PS. Нужно быть в готовности к выбрасываемым исключениям
+ в методах (см. описание методов), кроме того, текст на
+ кириллице должен передаваться на сервер в UTF-8 кодировке.
